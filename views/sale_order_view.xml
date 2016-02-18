@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="sale_order_three_discounts_form_view_inh">
+			<field name="name">sale.order.three_discounts.form.inh</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='order_line']//tree//field[@name='discount']" position="attributes">
+					<attribute name="readonly">True</attribute>
+				</xpath>
+				<xpath expr="//field[@name='order_line']//tree//field[@name='discount']" position="replace">
+					<field name="multi_discount" groups="sale.group_discount_per_so_line" string="Discount (%)" />
+ 				</xpath>
+			</field>
+		</record>
+         <record id="sale.view_order_form_discount" model="ir.ui.view">
+            <field name="name">sale_view_order_form_discount</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form//field[@name='discount']" position="replace">
+ 					<field name="multi_discount" groups="sale.group_discount_per_so_line"  string="Discount (%)"/>
+             		<field name="discount" groups="sale.group_discount_per_so_line" attrs="{'readonly':True}" />
+
+			</xpath>
+            </field>
+        </record>
+
+	</data>
+</openerp>

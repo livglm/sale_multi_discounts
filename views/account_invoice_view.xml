@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+
+      <!-- ======================================================	-->
+        <!--  				ACCOUNT.INVOICE.LINE TREE				-->
+        <!-- ======================================================-->
+<!--
+        <record id="view_invoice_line_tree_discount" model="ir.ui.view">
+            <field name="name">account.invoice.line.tree.discount</field>
+            <field name="model">account.invoice.line</field>
+             <field name="type">form</field>
+             <field name="inherit_id" ref="account.view_invoice_line_tree"/>
+           <field name="arch" type="xml">
+                <field name='name' position="after">
+               <field name="multi_discount" string="Discount (%)" groups="sale.group_discount_per_so_line"/>
+                 </field>
+            </field>
+        </record>
+-->
+
+
+        <record id="view_invoice_line_tree_discount" model="ir.ui.view">
+            <field name="name">account.invoice.line.tree.discount</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"></field>
+            <field name="arch" type="xml">
+                <field name="uos_id" position="after">
+              <field name="multi_discount" string="Discount (%)" groups="sale.group_discount_per_so_line"/>
+                </field>
+            </field>
+        </record>
+
+
+        <!-- ======================================================	-->
+        <!--  				ACCOUNT.INVOICE.LINE FORM				-->
+        <!-- ======================================================-->
+        <record id="view_invoice_line_form_discount" model="ir.ui.view">
+            <field name="name">account.invoice.line.form.discount</field>
+            <field name="model">account.invoice.line</field>
+            <field name="inherit_id" ref="account.view_invoice_line_form"/>
+            <field name="arch" type="xml">
+				<field name='discount' position="before">
+		        <field name="multi_discount" string="Discount (%)" />
+                </field>
+            </field>
+        </record>
+
+
+<!--
+        <record id="view_invoice_line_form_discoun" model="ir.ui.view">
+            <field name="name">view_invoice_line_form_uos</field>
+            <field name="model">account.invoice.line</field>
+            <field name="inherit_id" ref="account.view_invoice_line_form"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group/group/div" position="after">
+		        <field name="multi_discount" string="Discount (%)" />
+                </xpath>
+            </field>
+        </record>
+-->
+
+
+
+
+     </data>
+</openerp>
