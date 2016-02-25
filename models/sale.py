@@ -55,3 +55,18 @@ class sale_order_line_disc(models.Model):
         return res
 
 
+class sale_order_disc(models.Model):
+    _inherit = "sale.order"
+
+    @api.multi
+    def action_button_confirm(self):
+
+        picking_vals = super(sale_order_disc, self).action_button_confirm()
+
+        proc_obj = self.env['procurement.order']
+
+        for lines in self.env['sale.order.line'].search([('order_id','=',self.id)]):
+            proc_id = proc_obj.search([('sale_line_id','=',lines.id)])
+            moves = self.env['stock.move'].search([('procurement_id','=',proc_id.id)])
+            moves.write({'multi_discount': lines.multi_discount})
+

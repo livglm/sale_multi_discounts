@@ -4,4 +4,4 @@
 # directory
 ##############################################################################
 
-from . import sale, account
+from . import sale, account, stock
