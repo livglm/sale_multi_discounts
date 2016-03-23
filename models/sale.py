@@ -55,7 +55,7 @@ class sale_order_line_disc(models.Model):
             pattern = "^[0-9+.]$"
             for char in record:
                 print char
-                if re.match(str(pattern), str(char)):
+                if re.search(str(pattern), str(char)):
                     return char
                 else:
                     raise exceptions.Warning(
