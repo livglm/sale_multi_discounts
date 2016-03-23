@@ -38,6 +38,7 @@ class sale_order_line_disc(models.Model):
 
 
 
+    @api.multi
     @api.onchange('multi_discount')
     def discount_onchange(self):
         if self.multi_discount:
@@ -51,6 +52,7 @@ class sale_order_line_disc(models.Model):
             #             'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
             #     return False
             record = self.browse()
+            print record
             pattern ="^[0-9+.]$"
             for data in record:
                 print data.multi_discount
