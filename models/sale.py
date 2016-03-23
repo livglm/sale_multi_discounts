@@ -55,7 +55,7 @@ class sale_order_line_disc(models.Model):
             pattern = "^[0-9+.]$"
             for char in record:
                 print char
-                if not re.search(str(pattern), str(char)):
+                if not re.search(str(pattern), str(char)) or self.multi_discount[-1:]=='+' or self.multi_discount[-1:]=='.' or self.multi_discount == '':
                 #     a=a
                 #     #return char
                 # else:
