@@ -21,27 +21,35 @@ class stock_move_disc(models.Model):
     @api.one
     @api.depends('multi_discount')
     def get_discount(self):
-         discount_factor = 1.0
-         disc = ''
-         disc = self.multi_discount
-         if disc :
-             discounts = disc.split("+")
-             for discount in discounts:
-                 discount_factor = discount_factor * ((100.0 - float(discount)) / 100.0)
-                 self.discount = 100.0 - (discount_factor * 100.0)
+        discount_factor = 1.0
+        disc = ''
+        disc = self.multi_discount
+        try:
+            if disc :
+                discounts = disc.split("+")
+                for discount in discounts:
+                    discount_factor = discount_factor * ((100.0 - float(discount)) / 100.0)
+                    self.discount = 100.0 - (discount_factor * 100.0)
+        except:
+            raise exceptions.Warning(
+                _('You have entered an invalid character or did not use a number as the last character. '
+                  'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
+            return False
 
+
+
+    @api.multi
     @api.onchange('multi_discount')
     def discount_onchange(self):
-         if self.multi_discount:
-             p = re.compile('^[0-9+.]')
-             m = p.search(self.multi_discount)
-             print m
-             if not m or self.multi_discount[-1:]=='+' or self.multi_discount[-1:]=='.' or self.multi_discount == '':
-                 raise exceptions.Warning(
-                     _('You have entered an invalid character or did not use a number as the last character. '
-                         'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
-         else:
-             self.multi_discount = ''
+        if self.multi_discount:
+            record = str(self.multi_discount)
+            pattern = "^[0-9+.]$"
+            for char in record:
+                if not re.search(str(pattern), str(char)) or self.multi_discount[-1:]=='+' or self.multi_discount[-1:]=='.' or self.multi_discount == '':
+                    raise exceptions.Warning(
+                        _('You have entered an invalid character or did not use a number as the last character. '
+                          'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
+                    return False
 
 
     def _get_invoice_line_vals(self, cr, uid, move, partner, inv_type, context=None):
