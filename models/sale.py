@@ -40,8 +40,9 @@ class sale_order_line_disc(models.Model):
     @api.onchange('multi_discount')
     def discount_onchange(self):
         if self.multi_discount:
-            p = re.compile('[0-9+.]')
-            m = p.finditer(self.multi_discount)
+            #p = re.compile('[0-9+.]')
+            #m = p.finditer(self.multi_discount)
+            m = re.finditer('[0-9+.]*',self.multi_discount)
             print m
             if not m or self.multi_discount[-1:]=='+' or self.multi_discount[-1:]=='.' or self.multi_discount == '':
                 raise exceptions.Warning(
