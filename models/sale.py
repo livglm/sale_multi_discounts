@@ -53,6 +53,7 @@ class sale_order_line_disc(models.Model):
             record = self.browse()
             pattern ="^[0-9+.]$"
             for data in record:
+                print data.multi_discount
                 if re.match(pattern, data.multi_discount):
                     return True
                 else:
