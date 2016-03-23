@@ -42,29 +42,14 @@ class sale_order_line_disc(models.Model):
     @api.onchange('multi_discount')
     def discount_onchange(self):
         if self.multi_discount:
-            #p = re.compile('[0-9+.]')
-            #m = p.finditer(self.multi_discount)
-            # m = re.search('^[0-9+.]*',self.multi_discount)
-            # print m
-            # if m or self.multi_discount[-1:]=='+' or self.multi_discount[-1:]=='.' or self.multi_discount == '':
-            #     raise exceptions.Warning(
-            #         _('You have entered an invalid character or did not use a number as the last character. '
-            #             'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
-            #     return False
             record = str(self.multi_discount)
             pattern = "^[0-9+.]$"
             for char in record:
-                print char
                 if not re.search(str(pattern), str(char)) or self.multi_discount[-1:]=='+' or self.multi_discount[-1:]=='.' or self.multi_discount == '':
-                #     a=a
-                #     #return char
-                # else:
-                    raise exceptions.Warning(
+                     raise exceptions.Warning(
                         _('You have entered an invalid character or did not use a number as the last character. '
                           'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
                     return False
-        # else:
-        #      self.multi_discount = ''
 
     def _prepare_order_line_invoice_line(self, cr, uid, line, account_id=False, context=None):
 
