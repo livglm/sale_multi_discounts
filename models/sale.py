@@ -57,7 +57,7 @@ class sale_order_line_disc(models.Model):
                     return True
                 else:
                     raise exceptions.Warning(
-                        _('You2 have entered an invalid character or did not use a number as the last character. '
+                        _('You have entered an invalid character or did not use a number as the last character. '
                           'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
                     return False
         else:
