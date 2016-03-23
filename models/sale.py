@@ -56,7 +56,8 @@ class sale_order_line_disc(models.Model):
             for char in record:
                 print char
                 if re.search(str(pattern), str(char)):
-                    return char
+                    a=a
+                    #return char
                 else:
                     raise exceptions.Warning(
                         _('You have entered an invalid character or did not use a number as the last character. '
