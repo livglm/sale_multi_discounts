@@ -51,12 +51,12 @@ class sale_order_line_disc(models.Model):
             #         _('You have entered an invalid character or did not use a number as the last character. '
             #             'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
             #     return False
-            record = self.browse(self._id)
+            record = self.multi_discount
             print record
             pattern ="^[0-9+.]$"
-            for data in record:
-                print data.multi_discount
-                if re.match(pattern, data.multi_discount):
+            for char in record:
+                print char
+                if re.match(pattern, char):
                     return True
                 else:
                     raise exceptions.Warning(
