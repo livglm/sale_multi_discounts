@@ -44,7 +44,7 @@ class sale_order_line_disc(models.Model):
             #m = p.finditer(self.multi_discount)
             m = re.finditer('[0-9+.]*',self.multi_discount)
             print m
-            if not m or self.multi_discount[-1:]=='+' or self.multi_discount[-1:]=='.' or self.multi_discount == '':
+            if m or self.multi_discount[-1:]=='+' or self.multi_discount[-1:]=='.' or self.multi_discount == '':
                 raise exceptions.Warning(
                     _('You have entered an invalid character or did not use a number as the last character. '
                         'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
