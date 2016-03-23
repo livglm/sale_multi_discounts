@@ -24,11 +24,16 @@ class sale_order_line_disc(models.Model):
         discount_factor = 1.0
         disc = ''
         disc = self.multi_discount
-        if disc :
-            discounts = disc.split("+")
-            for discount in discounts:
-                discount_factor = discount_factor * ((100.0 - float(discount)) / 100.0)
-                self.discount = 100.0 - (discount_factor * 100.0)
+        try:
+            if disc :
+                discounts = disc.split("+")
+                for discount in discounts:
+                    discount_factor = discount_factor * ((100.0 - float(discount)) / 100.0)
+                    self.discount = 100.0 - (discount_factor * 100.0)
+        except:
+                raise exceptions.Warning(
+                    _('You have entered an invalid character or did not use a number as the last character. '
+                        'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
 
 
     @api.onchange('multi_discount')
