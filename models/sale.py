@@ -34,7 +34,7 @@ class sale_order_line_disc(models.Model):
                  raise exceptions.Warning(
                     _('You2 have entered an invalid character or did not use a number as the last character. '
                         'The allowed characters are : 0 1 2 3 4 5 6 7 8 9 + .'))
-                   return False
+                 return False
 
 
     @api.onchange('multi_discount')
